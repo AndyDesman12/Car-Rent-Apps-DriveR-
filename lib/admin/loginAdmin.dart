@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:drop_shadow/drop_shadow.dart';
-import 'user/daftarAkun.dart';
-import 'user/homeUser.dart';
-
-import 'admin/loginAdmin.dart';
+import 'homeAdmin.dart';
 
 
-void main() => runApp(const MaterialApp(
-      home: Login(),
-    ));
-class Login extends StatelessWidget {
-  const Login({super.key});
+class LoginAdmin extends StatelessWidget {
+  const LoginAdmin({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +113,7 @@ class Login extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const HomeUser()
+                          MaterialPageRoute(builder: (context) => const HomeAdmin()
                           ),
                       );
                     },
@@ -137,52 +131,8 @@ class Login extends StatelessWidget {
                   ),
 
                 ),
-                Container(
-                  margin: const EdgeInsets.fromLTRB(0, 50.0, 0, 0),
-                  child: ElevatedButton.icon(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const DaftarAkun()),
-                        );
-                      },
-                      icon: const Icon(Icons.app_registration),
-                      label: const Text('Daftar Akun'),
-                      style: ElevatedButton.styleFrom(
-                        textStyle: const TextStyle(
-                            fontFamily: 'Outfit',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15.0
-                        ),
-                      elevation: 5, // Button elevation
-                      padding: const EdgeInsets.all(16.0), // Button padding
-                    ),
-                  ),
-                ),
               ],
             ),
-            Container(
-              margin: const EdgeInsets.fromLTRB(0, 50.0, 0, 0),
-              child: ElevatedButton.icon(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const LoginAdmin()),
-                  );
-                },
-                icon: const Icon(Icons.person),
-                label: const Text('Admin'),
-                style: ElevatedButton.styleFrom(
-                  textStyle: const TextStyle(
-                      fontFamily: 'Outfit',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15.0
-                  ),
-                  elevation: 5, // Button elevation
-                  padding: const EdgeInsets.all(16.0), // Button padding
-                ),
-              ),
-              ),
           ],
         ),
       ),
@@ -193,7 +143,6 @@ class Login extends StatelessWidget {
         color: Colors.lightBlue,
         child: Container(height: 50.0),
       ),
-
     );
   }
 }
