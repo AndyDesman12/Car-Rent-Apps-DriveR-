@@ -6,7 +6,7 @@ class CharacterLimitTextField extends StatefulWidget {
   final int maxCharacters; // Maximum number of characters allowed
   final Function(String)? onChanged; // Callback for text changes
 
-  CharacterLimitTextField({required this.maxCharacters, this.onChanged});
+  const CharacterLimitTextField({super.key, required this.maxCharacters, this.onChanged});
 
   @override
   _CharacterLimitTextFieldState createState() => _CharacterLimitTextFieldState();
@@ -52,7 +52,7 @@ class _CharacterLimitTextFieldState extends State<CharacterLimitTextField> {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: _controller,
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         labelText: "NIK",
       ),
       validator: (value) {
@@ -155,7 +155,7 @@ class _DaftarAkunState extends State<DaftarAkun> {
                       color: Colors.white12,
                     ),
                     child: TextFormField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Name',
                       ),
                       validator: (value) {
@@ -197,7 +197,7 @@ class _DaftarAkunState extends State<DaftarAkun> {
                       color: Colors.white12,
                     ),
                     child: TextFormField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Email',
                       ),
                       validator: (value) {
@@ -224,7 +224,7 @@ class _DaftarAkunState extends State<DaftarAkun> {
                     ),
                     child: TextFormField(
                       obscureText: true,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Password',
                       ),
                       validator: (value) {

@@ -75,7 +75,7 @@ class _HistoryState extends State<History> {
                       children: [
                         Container(
                           margin: const EdgeInsets.fromLTRB(10.0, 10, 0, 0),
-                          child: Icon(
+                          child: const Icon(
                             Icons.people,
                             color: Colors.black,
                           ),
@@ -83,9 +83,9 @@ class _HistoryState extends State<History> {
 
                         Container(
                           margin: const EdgeInsets.fromLTRB(7.0, 10, 0, 0),
-                          child: Text(
+                          child: const Text(
                             'Andy Desman',
-                            style: const TextStyle(
+                            style: TextStyle(
                               color: Colors.lightBlue,
                               fontFamily: 'Outfit',
                               fontWeight: FontWeight.bold,
@@ -99,16 +99,16 @@ class _HistoryState extends State<History> {
                       children: [
                         Container(
                           margin: const EdgeInsets.fromLTRB(10.0, 10, 0, 0),
-                          child: Icon(
+                          child: const Icon(
                             Icons.card_membership,
                             color: Colors.black,
                           ),
                         ),
                         Container(
                           margin: const EdgeInsets.fromLTRB(7.0, 5, 0, 0),
-                          child: Text(
+                          child: const Text(
                             '1234567890123456',
-                            style: const TextStyle(
+                            style: TextStyle(
                               color: Colors.lightBlue,
                               fontFamily: 'Outfit',
                               fontWeight: FontWeight.bold,
@@ -171,7 +171,7 @@ class _HistoryState extends State<History> {
                       children: [
                         Container(
                           margin: const EdgeInsets.fromLTRB(20.0, 10, 0, 0),
-                          child: Icon(
+                          child: const Icon(
                             Icons.people,
                             color: Colors.black,
                           ),
@@ -179,9 +179,9 @@ class _HistoryState extends State<History> {
 
                         Container(
                           margin: const EdgeInsets.fromLTRB(7.0, 10, 0, 0),
-                          child: Text(
+                          child: const Text(
                             'Fiqih',
-                            style: const TextStyle(
+                            style: TextStyle(
                               color: Colors.lightBlue,
                               fontFamily: 'Outfit',
                               fontWeight: FontWeight.bold,
@@ -195,16 +195,16 @@ class _HistoryState extends State<History> {
                       children: [
                         Container(
                           margin: const EdgeInsets.fromLTRB(20.0, 10, 0, 0),
-                          child: Icon(
+                          child: const Icon(
                             Icons.card_membership,
                             color: Colors.black,
                           ),
                         ),
                         Container(
                           margin: const EdgeInsets.fromLTRB(7.0, 5, 0, 0),
-                          child: Text(
+                          child: const Text(
                             '1234567890789456',
-                            style: const TextStyle(
+                            style: TextStyle(
                               color: Colors.lightBlue,
                               fontFamily: 'Outfit',
                               fontWeight: FontWeight.bold,

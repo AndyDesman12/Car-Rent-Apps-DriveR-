@@ -1,4 +1,3 @@
-import 'package:code/main.dart';
 import 'package:flutter/material.dart';
 import 'history.dart';
 import 'carInfo.dart';
@@ -36,10 +35,9 @@ class _HomeUserState extends State<HomeUser> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      // Navigate to the second page when the image is tapped
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => carInfo()),
+                        MaterialPageRoute(builder: (context) => const carInfo()),
                       );
                     },
                     child: Card(
@@ -108,7 +106,7 @@ class _HomeUserState extends State<HomeUser> {
                       // Navigate to the second page when the image is tapped
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => carInfo()),
+                        MaterialPageRoute(builder: (context) => const carInfo()),
                       );
                     },
                     child: Card(

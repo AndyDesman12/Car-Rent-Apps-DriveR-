@@ -92,7 +92,7 @@ class _HomeAdminState extends State<HomeAdmin> {
                         Container(
                           width: 40,
                           height: 40,
-                          margin: EdgeInsets.all(10.0),
+                          margin: const EdgeInsets.all(10.0),
                           child: Card(
                             elevation: 5.0,
                             child: IconButton(
@@ -110,7 +110,7 @@ class _HomeAdminState extends State<HomeAdmin> {
                         Container(
                           width: 40,
                           height: 40,
-                          margin: EdgeInsets.fromLTRB(0, 10.0, 10.0, 10.0),
+                          margin: const EdgeInsets.fromLTRB(0, 10.0, 10.0, 10.0),
                           child: Card(
                             elevation: 5.0,
                             child: IconButton(
@@ -215,7 +215,7 @@ class _HomeAdminState extends State<HomeAdmin> {
                         Container(
                           width: 40,
                           height: 40,
-                          margin: EdgeInsets.all(10.0),
+                          margin: const EdgeInsets.all(10.0),
                           child: Card(
                             elevation: 5.0,
                             child: IconButton(
@@ -233,7 +233,7 @@ class _HomeAdminState extends State<HomeAdmin> {
                         Container(
                           width: 40,
                           height: 40,
-                          margin: EdgeInsets.fromLTRB(0, 10.0, 10.0, 10.0),
+                          margin: const EdgeInsets.fromLTRB(0, 10.0, 10.0, 10.0),
                           child: Card(
                             elevation: 5.0,
                             child: IconButton(

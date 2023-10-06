@@ -86,7 +86,7 @@ class _LoginAdminState extends State<LoginAdmin> {
                       color: Colors.white12,
                     ),
                     child: TextFormField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Email',
                       ),
                       validator: (value) {
@@ -113,7 +113,7 @@ class _LoginAdminState extends State<LoginAdmin> {
                     ),
                     child: TextFormField(
                       obscureText: true,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Password',
                       ),
                       validator: (value) {
