@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:drop_shadow/drop_shadow.dart';
 import '../main.dart';
-import 'infoPribadi.dart';
 
 void main() => runApp(const MaterialApp(
   home: Login(),
@@ -69,12 +68,47 @@ class DaftarAkun extends StatelessWidget {
             ),
 
 
+            Align(
+              alignment: FractionalOffset.topCenter,
+              child: Container(
+                width: 200,
+                margin: const EdgeInsets.fromLTRB(0, 20.0, 0, 0),
+                decoration: const BoxDecoration(
+                  color: Colors.white12,
+                ),
+                child: const TextField(
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: InputDecoration(
+                    labelText: "Name",
+                    hintText: 'Enter Your Name',
+                  ),
+                ),
+              ),
+            ),
 
             Align(
               alignment: FractionalOffset.topCenter,
               child: Container(
                 width: 200,
-                margin: const EdgeInsets.fromLTRB(0, 40.0, 0, 0),
+                margin: const EdgeInsets.fromLTRB(0, 20.0, 0, 0),
+                decoration: const BoxDecoration(
+                  color: Colors.white12,
+                ),
+                child: const TextField(
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: InputDecoration(
+                    labelText: "NIK",
+                    hintText: 'Enter Your NIK',
+                  ),
+                ),
+              ),
+            ),
+
+            Align(
+              alignment: FractionalOffset.topCenter,
+              child: Container(
+                width: 200,
+                margin: const EdgeInsets.fromLTRB(0, 20.0, 0, 0),
                 decoration: const BoxDecoration(
                   color: Colors.white12,
                 ),
@@ -108,6 +142,8 @@ class DaftarAkun extends StatelessWidget {
               ),
             ),
 
+
+
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -117,11 +153,11 @@ class DaftarAkun extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const infoPribadi()),
+                        MaterialPageRoute(builder: (context) => const Login()),
                       );
                     },
                     icon: const Icon(Icons.app_registration),
-                    label: const Text('Lanjut'),
+                    label: const Text('Daftar'),
                     style: ElevatedButton.styleFrom(
                       textStyle: const TextStyle(
                           fontFamily: 'Outfit',
