@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 
-class HomeUser extends StatelessWidget {
-  const HomeUser({super.key});
+class carInfo extends StatelessWidget {
+  const carInfo({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text('DriveR'),
+        title: const Text('Information'),
         centerTitle: true,
         backgroundColor: Colors.lightBlue[600],
       ),
