@@ -1,29 +1,6 @@
 import 'package:flutter/material.dart';
 import 'history.dart';
-import 'carInfo.dart';
-
-void _showDialog(BuildContext context) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text('Konfirmasi Pemesanan'),
-        content: Text('Anda diminta untuk mengirimkan foto KTP sebagai verifikasi pemesanan'),
-        titleTextStyle: TextStyle(
-          fontFamily: 'Outfit',
-        ),
-        actions: <Widget>[
-          TextButton(
-            child: Text('Lanjut'),
-            onPressed: () {
-              Navigator.of(context).pop(); // Close the dialog
-            },
-          ),
-        ],
-      );
-    },
-  );
-}
+import 'uploadKtp.dart';
 
 class HomeUser extends StatefulWidget {
   const HomeUser({super.key});
@@ -55,25 +32,17 @@ class _HomeUserState extends State<HomeUser> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const carInfo()),
-                      );
-                    },
-                    child: Card(
-                      elevation: 5.0,
-                      color: Colors.white,
-                      shadowColor: Colors.lightBlue,
-                      child: Container(
-                        child: const Image(
-                          image: AssetImage(
-                            'assets/avanza.jpg',
-                          ),
-                          height: 150,
-                          width: 220,
+                  Card(
+                    elevation: 5.0,
+                    color: Colors.white,
+                    shadowColor: Colors.lightBlue,
+                    child: Container(
+                      child: const Image(
+                        image: AssetImage(
+                          'assets/avanza.jpg',
                         ),
+                        height: 150,
+                        width: 220,
                       ),
                     ),
                   ),
@@ -121,7 +90,10 @@ class _HomeUserState extends State<HomeUser> {
                             margin: const EdgeInsets.fromLTRB(20.0, 10.0, 0.0, 0.0),
                             child: ElevatedButton.icon(
                               onPressed: () {
-                                _showDialog(context); // Call the function to show the dialog
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => const uploadKtp()),
+                                );
                               },
                               icon: const Icon(Icons.shopping_cart),
                               label: const Text('Pesan'),
@@ -143,26 +115,17 @@ class _HomeUserState extends State<HomeUser> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        // Navigate to the second page when the image is tapped
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const carInfo()),
-                        );
-                      },
-                      child: Card(
-                        elevation: 5.0,
-                        color: Colors.white,
-                        shadowColor: Colors.lightBlue,
-                        child: Container(
-                          child: const Image(
-                            image: AssetImage(
-                              'assets/innova.jpg',
-                            ),
-                            height: 150,
-                            width: 220,
+                    Card(
+                      elevation: 5.0,
+                      color: Colors.white,
+                      shadowColor: Colors.lightBlue,
+                      child: Container(
+                        child: const Image(
+                          image: AssetImage(
+                            'assets/innova.jpg',
                           ),
+                          height: 150,
+                          width: 220,
                         ),
                       ),
                     ),
@@ -210,7 +173,10 @@ class _HomeUserState extends State<HomeUser> {
                               margin: const EdgeInsets.fromLTRB(20.0, 10.0, 0.0, 0.0),
                               child: ElevatedButton.icon(
                                 onPressed: () {
-                                  _showDialog(context); // Call the function to show the dialog
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => const uploadKtp()),
+                                  );
                                 },
                                 icon: const Icon(Icons.shopping_cart),
                                 label: const Text('Pesan'),

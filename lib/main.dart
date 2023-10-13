@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:drop_shadow/drop_shadow.dart';
 import 'user/daftarAkun.dart';
 import 'user/homeUser.dart';
-
 import 'admin/loginAdmin.dart';
 
 
 void main() => runApp(const MaterialApp(
       home: Login(),
     ));
+
 class Login extends StatefulWidget {
   const Login({super.key});
 
@@ -150,10 +150,7 @@ class _LoginState extends State<Login> {
                               MaterialPageRoute(builder: (context) => const HomeUser()
                               ),
                             );
-                            // Perform an action with the text field value
-                            // For example, display it in a snackbar
                           }
-
                         },
                         icon: const Icon(Icons.login),
                         label: const Text('Login'),

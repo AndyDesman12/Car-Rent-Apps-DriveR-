@@ -1,3 +1,4 @@
+import 'package:code/admin/addCar.dart';
 import 'package:flutter/material.dart';
 import 'checkout.dart';
 
@@ -276,7 +277,12 @@ class _HomeAdminState extends State<HomeAdmin> {
       ),
 
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+              context, 
+              MaterialPageRoute(builder: (context) => const addCar()),
+          );
+        },
         child: const Icon(Icons.add),
       ),
       bottomNavigationBar: BottomAppBar(
