@@ -1,3 +1,4 @@
+import '/admin/detail.dart';
 import '/admin/homeAdmin.dart';
 import '/controller/mobil_controller.dart';
 import '/models/mobil_model.dart';
@@ -22,7 +23,7 @@ class _CheckoutState extends State<Checkout> {
 
   Future<void> imageformdb() async {
     try {
-      String uri = "http://192.168.7.210/carApi/viewt.php";
+      String uri = "http://192.168.12.105/carApi/viewt.php";
       var response = await http.get(Uri.parse(uri));
       setState(() {
         record = jsonDecode(response.body);
@@ -34,7 +35,7 @@ class _CheckoutState extends State<Checkout> {
 
   Future<void> ubaah() async {
     try {
-      String uri = "http://192.168.7.210/carApi/updatechek.php";
+      String uri = "http://192.168.12.105/carApi/updatechek.php";
       var response = await http.post(Uri.parse(uri));
       setState(() {
         record = jsonDecode(response.body);
@@ -66,114 +67,99 @@ class _CheckoutState extends State<Checkout> {
           itemBuilder: (BuildContext context, int index) {
             return Padding(
               padding: const EdgeInsets.fromLTRB(0, 40.0, 0, 0),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Card(
-                        elevation: 5.0,
-                        color: Colors.white,
-                        shadowColor: Colors.lightBlue,
-                        child: Container(
-                          child: CachedNetworkImage(
-                            imageUrl: 'http://192.168.7.210/carApi/' +
-                                record[index]["mobil"],
-                            height: 150,
-                            width: 220,
-                          ),
-                        ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                              margin: const EdgeInsets.fromLTRB(
-                                  10.0, 0.0, 0.0, 0.0),
-                              child: ElevatedButton.icon(
-                                onPressed: () {
-                                  ubaah();
-                                },
-                                icon: const Icon(Icons.check),
-                                label: const Text('Valid'),
-                                style: ElevatedButton.styleFrom(
-                                  foregroundColor: Colors.white,
-                                  backgroundColor:
-                                      Colors.green, // Set the text color
-                                  elevation: 5, // Set the button's elevation
-                                  // You can customize other button properties here
-                                ),
-                              )),
-                          Container(
-                            margin:
-                                const EdgeInsets.fromLTRB(10.0, 0.0, 0.0, 0.0),
-                            child: ElevatedButton.icon(
-                              onPressed: () {},
-                              icon: const Icon(Icons.cancel),
-                              label: const Text('Invalid'),
-                              style: ElevatedButton.styleFrom(
-                                foregroundColor: Colors.white,
-                                backgroundColor:
-                                    Colors.red, // Set the text color
-                                elevation: 5, // Set the button's elevation
-                                // You can customize other button properties here
-                              ),
+              child: InkWell(
+                onTap: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Detail(
+                              ListData: {
+                                "idt": record[index]["idt"],
+                                "fotomobil": record[index]["mobil"],
+                                "nama": record[index]["nama"],
+                                "nik": record[index]["nik"],
+                                "fotoktp": record[index]["image_ktp"],
+                              },
+                            )),
+                  );
+                },
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Card(
+                          elevation: 5.0,
+                          color: Colors.white,
+                          shadowColor: Colors.lightBlue,
+                          child: Container(
+                            child: CachedNetworkImage(
+                              imageUrl: 'http://192.168.12.105/carApi/' +
+                                  record[index]["mobil"],
+                              height: 150,
+                              width: 220,
                             ),
                           ),
-                          Row(
-                            children: [
-                              Container(
-                                margin:
-                                    const EdgeInsets.fromLTRB(10.0, 10, 0, 0),
-                                child: const Icon(
-                                  Icons.people,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              Container(
-                                margin:
-                                    const EdgeInsets.fromLTRB(7.0, 10, 0, 0),
-                                child: Text(
-                                  (record[index]["nama"]),
-                                  style: TextStyle(
-                                    color: Colors.lightBlue,
-                                    fontFamily: 'Outfit',
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15.0,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Container(
+                                  margin:
+                                      const EdgeInsets.fromLTRB(10.0, 10, 0, 0),
+                                  child: const Icon(
+                                    Icons.people,
+                                    color: Colors.black,
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Container(
-                                margin:
-                                    const EdgeInsets.fromLTRB(10.0, 10, 0, 0),
-                                child: const Icon(
-                                  Icons.card_membership,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              Container(
-                                margin: const EdgeInsets.fromLTRB(7.0, 5, 0, 0),
-                                child: Text(
-                                  (record[index]["nik"]),
-                                  style: TextStyle(
-                                    color: Colors.lightBlue,
-                                    fontFamily: 'Outfit',
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15.0,
+                                Container(
+                                  margin:
+                                      const EdgeInsets.fromLTRB(7.0, 10, 0, 0),
+                                  child: Text(
+                                    (record[index]["nama"]),
+                                    style: TextStyle(
+                                      color: Colors.lightBlue,
+                                      fontFamily: 'Outfit',
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15.0,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Container(
+                                  margin:
+                                      const EdgeInsets.fromLTRB(10.0, 10, 0, 0),
+                                  child: const Icon(
+                                    Icons.card_membership,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                Container(
+                                  margin:
+                                      const EdgeInsets.fromLTRB(7.0, 5, 0, 0),
+                                  child: Text(
+                                    (record[index]["nik"]),
+                                    style: TextStyle(
+                                      color: Colors.lightBlue,
+                                      fontFamily: 'Outfit',
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15.0,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             );
           }),
