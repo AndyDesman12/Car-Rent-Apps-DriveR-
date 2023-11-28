@@ -1,11 +1,13 @@
+import 'dart:convert';
+
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'homeAdmin.dart';
 import 'checkout.dart';
-import 'package:code/user/daftarAkun.dart';
-
-
-
-
+import 'dart:io';
+import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
+import 'package:flutter_toastr/flutter_toastr.dart';
 
 class addCar extends StatefulWidget {
   const addCar({super.key});
@@ -17,6 +19,52 @@ class addCar extends StatefulWidget {
 class _addCarState extends State<addCar> {
   final _formKey = GlobalKey<FormState>();
   String _textFieldValue = ''; // To store the text field value
+  TextEditingController nama = TextEditingController();
+  TextEditingController harga = TextEditingController();
+  TextEditingController stok = TextEditingController();
+
+  File? imagepath;
+  String? imagename;
+  String? imagedata;
+  ImagePicker imagePicker = new ImagePicker();
+
+  Future<void> uploadimage() async {
+    try {
+      String uri = "http://192.168.7.210/carApi/upload.php";
+      // var caption;
+      var res = await http.post(Uri.parse(uri), body: {
+        "nama": nama.text,
+        "harga": harga.text,
+        "stok": stok.text,
+        "data": imagedata,
+        "name": imagename
+      });
+      var response = jsonDecode(res.body);
+      if (response["succes"] == "true") {
+        // Navigator.pushReplacement(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => const HomeAdmin()),
+        // );
+        print("sedang upload");
+      } else
+        print("gagal");
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> getImage() async {
+    var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      imagepath = File(getimage!.path);
+      imagename = getimage.path.split('/').last;
+      imagedata = base64Encode(imagepath!.readAsBytesSync());
+      print(imagepath);
+      print(imagename);
+      print(imagedata);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +75,6 @@ class _addCarState extends State<addCar> {
         centerTitle: true,
         backgroundColor: Colors.lightBlue[600],
       ),
-
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.fromLTRB(40.0, 40.0, 40.0, 0),
@@ -47,23 +94,24 @@ class _addCarState extends State<addCar> {
                         ),
                       ),
                       margin: const EdgeInsets.fromLTRB(0.0, 50.0, 0.0, 0.0),
-                      child: ElevatedButton.icon(
-                        onPressed: () {},
-                        icon: const Icon(Icons.add_a_photo_outlined),
-                        label: const Text('Upload Foto Mobil'),
-                        style: ElevatedButton.styleFrom(
-                            foregroundColor: Colors.lightBlue,
-                            backgroundColor: Colors.white,
-                            elevation: 10,
-                            textStyle: TextStyle(
-                              fontFamily: 'Outfit',
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-
-                            )
-                        ),
-                      )
-                  ),
+                      child: imagepath != null
+                          ? Image.file(imagepath!)
+                          : ElevatedButton.icon(
+                              onPressed: () {
+                                getImage();
+                              },
+                              icon: const Icon(Icons.add_a_photo_outlined),
+                              label: const Text('Upload Foto Mobil'),
+                              style: ElevatedButton.styleFrom(
+                                  foregroundColor: Colors.lightBlue,
+                                  backgroundColor: Colors.white,
+                                  elevation: 10,
+                                  textStyle: TextStyle(
+                                    fontFamily: 'Outfit',
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  )),
+                            )),
                 ),
                 Align(
                   alignment: FractionalOffset.topCenter,
@@ -74,6 +122,7 @@ class _addCarState extends State<addCar> {
                       color: Colors.white12,
                     ),
                     child: TextFormField(
+                      controller: nama,
                       decoration: const InputDecoration(
                         labelText: 'Nama',
                       ),
@@ -89,16 +138,20 @@ class _addCarState extends State<addCar> {
                     ),
                   ),
                 ),
-
                 Align(
                   alignment: FractionalOffset.topCenter,
                   child: Container(
                     width: 200,
-                    margin: const EdgeInsets.fromLTRB(0,10.0, 0, 0),
+                    margin: const EdgeInsets.fromLTRB(0, 10.0, 0, 0),
                     decoration: const BoxDecoration(
                       color: Colors.white12,
                     ),
                     child: TextFormField(
+                      controller: harga,
+                      keyboardType: TextInputType.number,
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
                       decoration: const InputDecoration(
                         labelText: 'Harga',
                       ),
@@ -114,16 +167,20 @@ class _addCarState extends State<addCar> {
                     ),
                   ),
                 ),
-
                 Align(
                   alignment: FractionalOffset.topCenter,
                   child: Container(
                     width: 200,
-                    margin: const EdgeInsets.fromLTRB(0,10.0, 0, 0),
+                    margin: const EdgeInsets.fromLTRB(0, 10.0, 0, 0),
                     decoration: const BoxDecoration(
                       color: Colors.white12,
                     ),
                     child: TextFormField(
+                      controller: stok,
+                      keyboardType: TextInputType.number,
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
                       decoration: const InputDecoration(
                         labelText: 'Stok',
                       ),
@@ -144,13 +201,19 @@ class _addCarState extends State<addCar> {
                   child: ElevatedButton.icon(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        // If the form is valid, save the form data and take action
-                        _formKey.currentState!.save();
-                        Navigator.push(
+                        setState(() {
+                          uploadimage();
+                        });
+                        FlutterToastr.show("Mobil berhasil ditambah", context,
+                            duration: FlutterToastr.lengthLong,
+                            position: FlutterToastr.bottom,
+                            backgroundColor: Colors.green);
+                        Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(builder: (context) => const HomeAdmin()
-                          ),
+                          MaterialPageRoute(
+                              builder: (context) => const HomeAdmin()),
                         );
+                        // If the form is valid, save the form data and take action
                       }
                     },
                     icon: const Icon(Icons.add),
@@ -159,21 +222,17 @@ class _addCarState extends State<addCar> {
                       textStyle: const TextStyle(
                           fontFamily: 'Outfit',
                           fontWeight: FontWeight.bold,
-                          fontSize: 15.0
-                      ),
+                          fontSize: 15.0),
                       elevation: 5, // Button elevation
                       padding: const EdgeInsets.all(16.0), // Button padding
                     ),
                   ),
-
                 ),
-
               ],
             ),
           ),
         ),
       ),
-
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
         color: Colors.lightBlue,
@@ -184,7 +243,7 @@ class _addCarState extends State<addCar> {
             IconButton(
               icon: const Icon(Icons.home),
               onPressed: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => const HomeAdmin()),
                 );
@@ -194,7 +253,7 @@ class _addCarState extends State<addCar> {
             IconButton(
               icon: const Icon(Icons.shopping_cart_checkout),
               onPressed: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => const Checkout()),
                 );
