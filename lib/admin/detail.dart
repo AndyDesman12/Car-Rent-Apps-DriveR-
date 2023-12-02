@@ -1,4 +1,5 @@
-import '/admin/checkout.dart';
+import 'checkout.dart';
+
 import '/admin/homeAdmin.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -17,14 +18,24 @@ class Detail extends StatefulWidget {
 class _DetailState extends State<Detail> {
   final _form_key = GlobalKey<FormState>();
   // TextEditingController idt = new TextEditingController();
-  String ket = "Konfirmasi";
+  String ket = "Terkonfirmasi";
+  String tolak = "Ditolak";
   Future _update() async {
-    return http.post(Uri.parse('http://192.168.12.105/carApi/konfirmasi.php'),
+    return http.post(Uri.parse('http://10.0.48.60/carApi/konfirmasi.php'),
         body: {"idt": widget.ListData['idt'], "keterangan": ket});
+  }
+
+  Future _tolak() async {
+    return http.post(Uri.parse('http://10.0.48.60/carApi/konfirmasi.php'),
+        body: {"idt": widget.ListData['idt'], "keterangan": tolak});
   }
 
   void _confirm(context) async {
     await _update();
+  }
+
+  void _cancel(context) async {
+    await _tolak();
   }
 
   @override
@@ -48,7 +59,7 @@ class _DetailState extends State<Detail> {
                 shadowColor: Colors.lightBlue,
                 child: Container(
                   child: CachedNetworkImage(
-                    imageUrl: 'http://192.168.12.105/carApi/' +
+                    imageUrl: 'http://10.0.48.60/carApi/' +
                         widget.ListData['fotomobil'],
                     height: 150,
                     width: 220,
@@ -111,55 +122,92 @@ class _DetailState extends State<Detail> {
                       ),
                     ],
                   ),
-                  Container(
-                    padding: EdgeInsets.fromLTRB(0, 20, 0, 30.0),
-                    child: Card(
-                      elevation: 5.0,
-                      color: Colors.white,
-                      shadowColor: Colors.lightBlue,
-                      child: Container(
-                        child: CachedNetworkImage(
-                          imageUrl: 'http://192.168.12.105/carApi/' +
-                              widget.ListData['fotoktp'],
-                          height: 150,
-                          width: 220,
+                  Center(
+                    child: Container(
+                      padding: EdgeInsets.fromLTRB(0, 20, 0, 30.0),
+                      child: Card(
+                        elevation: 5.0,
+                        color: Colors.white,
+                        shadowColor: Colors.lightBlue,
+                        child: Container(
+                          child: CachedNetworkImage(
+                            imageUrl: 'http://10.0.48.60/carApi/' +
+                                widget.ListData['fotoktp'],
+                            height: 230,
+                            width: 300,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                  Center(
-                    child: Container(
-                        margin: const EdgeInsets.fromLTRB(0.0, 50.0, 0.0, 0.0),
-                        child: ElevatedButton.icon(
-                          onPressed: () {
-                            _confirm(context);
-                            FlutterToastr.show(
-                                "Orderan Berhasil Di Konfirmasi", context,
-                                duration: FlutterToastr.lengthLong,
-                                position: FlutterToastr.bottom,
-                                backgroundColor: Colors.green);
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Checkout()),
-                            );
-                          },
-                          icon: const Icon(Icons.punch_clock),
-                          label: const Text('Validation'),
-                          style: ElevatedButton.styleFrom(
-                              foregroundColor: Colors.white,
-                              backgroundColor:
-                                  Colors.lightBlue, // Set the text color
-                              elevation: 5,
-                              textStyle: TextStyle(
-                                fontFamily: 'Outfit',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ) // Set the button's elevation
-                              // You can customize other button properties here
-                              ),
-                        )),
-                  ),
+                  Row(
+                    children: [
+                      Container(
+                          margin:
+                              const EdgeInsets.fromLTRB(10.0, 50.0, 0.0, 0.0),
+                          child: ElevatedButton.icon(
+                            onPressed: () {
+                              _confirm(context);
+                              FlutterToastr.show(
+                                  "Orderan Berhasil Di Konfirmasi", context,
+                                  duration: FlutterToastr.lengthLong,
+                                  position: FlutterToastr.bottom,
+                                  backgroundColor: Colors.green);
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Checkout()),
+                              );
+                            },
+                            icon: const Icon(Icons.punch_clock),
+                            label: const Text('Konfirmasi'),
+                            style: ElevatedButton.styleFrom(
+                                foregroundColor: Colors.white,
+                                backgroundColor:
+                                    Colors.lightBlue, // Set the text color
+                                elevation: 5,
+                                textStyle: TextStyle(
+                                  fontFamily: 'Outfit',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ) // Set the button's elevation
+                                // You can customize other button properties here
+                                ),
+                          )),
+                      Container(
+                          margin:
+                              const EdgeInsets.fromLTRB(30.0, 50.0, 0.0, 0.0),
+                          child: ElevatedButton.icon(
+                            onPressed: () {
+                              _cancel(context);
+                              FlutterToastr.show(
+                                  "Orderan Telah Ditolak", context,
+                                  duration: FlutterToastr.lengthLong,
+                                  position: FlutterToastr.bottom,
+                                  backgroundColor: Colors.red);
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Checkout()),
+                              );
+                            },
+                            icon: const Icon(Icons.punch_clock),
+                            label: const Text('Tolak'),
+                            style: ElevatedButton.styleFrom(
+                                foregroundColor: Colors.white,
+                                backgroundColor:
+                                    Colors.red, // Set the text color
+                                elevation: 5,
+                                textStyle: TextStyle(
+                                  fontFamily: 'Outfit',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ) // Set the button's elevation
+                                // You can customize other button properties here
+                                ),
+                          )),
+                    ],
+                  )
                 ],
               ),
             ),

@@ -1,8 +1,8 @@
-import '/admin/detail.dart';
-import '/admin/homeAdmin.dart';
-import '/controller/mobil_controller.dart';
-import '/models/mobil_model.dart';
-import '/user/history.dart';
+import 'detail.dart';
+import 'homeAdmin.dart';
+import '../controller/mobil_controller.dart';
+import '../models/mobil_model.dart';
+import '../user/history.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'dart:async';
@@ -19,11 +19,12 @@ class Checkout extends StatefulWidget {
 class _CheckoutState extends State<Checkout> {
   final _form_key = GlobalKey<FormState>();
   List record = [];
-  String ubah = "Selesai";
+  String teks = "Menunggu";
+  String tolak = "Ditolak";
 
   Future<void> imageformdb() async {
     try {
-      String uri = "http://192.168.12.105/carApi/viewt.php";
+      String uri = "http://10.0.48.60/carApi/viewt.php";
       var response = await http.get(Uri.parse(uri));
       setState(() {
         record = jsonDecode(response.body);
@@ -35,7 +36,7 @@ class _CheckoutState extends State<Checkout> {
 
   Future<void> ubaah() async {
     try {
-      String uri = "http://192.168.12.105/carApi/updatechek.php";
+      String uri = "http://10.0.48.60/carApi/updatechek.php";
       var response = await http.post(Uri.parse(uri));
       setState(() {
         record = jsonDecode(response.body);
@@ -94,7 +95,7 @@ class _CheckoutState extends State<Checkout> {
                           shadowColor: Colors.lightBlue,
                           child: Container(
                             child: CachedNetworkImage(
-                              imageUrl: 'http://192.168.12.105/carApi/' +
+                              imageUrl: 'http://10.0.48.60/carApi/' +
                                   record[index]["mobil"],
                               height: 150,
                               width: 220,
@@ -153,6 +154,23 @@ class _CheckoutState extends State<Checkout> {
                                   ),
                                 ),
                               ],
+                            ),
+                            Container(
+                              margin: const EdgeInsets.fromLTRB(
+                                  10.0, 0.0, 0.0, 0.0),
+                              child: Text(
+                                (record[index]["keterangan"]),
+                                style: TextStyle(
+                                  fontFamily: 'Outfit',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                  color: tolak == (record[index]["keterangan"])
+                                      ? Colors.red
+                                      : teks == (record[index]["keterangan"])
+                                          ? Colors.yellow
+                                          : Colors.green,
+                                ),
+                              ),
                             ),
                           ],
                         ),

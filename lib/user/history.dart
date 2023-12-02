@@ -21,11 +21,12 @@ class _HistoryState extends State<History> {
   // int hargaInnova = 150000;
   // int stokInnova = 1;
   String teks = "Menunggu";
+  String tolak = "Ditolak";
   List record = [];
 
   Future<void> imageformdb() async {
     try {
-      String uri = "http://192.168.7.210/carApi/viewt.php";
+      String uri = "http://10.0.48.60/carApi/viewt.php";
       var response = await http.get(Uri.parse(uri));
       setState(() {
         record = jsonDecode(response.body);
@@ -68,7 +69,7 @@ class _HistoryState extends State<History> {
                         shadowColor: Colors.lightBlue,
                         child: Container(
                           child: CachedNetworkImage(
-                            imageUrl: 'http://192.168.7.210/carApi/' +
+                            imageUrl: 'http://10.0.48.60/carApi/' +
                                 record[index]["mobil"],
                             height: 150,
                             width: 220,
@@ -99,10 +100,12 @@ class _HistoryState extends State<History> {
                               style: TextStyle(
                                 fontFamily: 'Outfit',
                                 fontWeight: FontWeight.bold,
-                                fontSize: 30.0,
-                                color: teks == (record[index]["keterangan"])
-                                    ? Colors.yellow
-                                    : Colors.black,
+                                fontSize: 25.0,
+                                color: tolak == (record[index]["keterangan"])
+                                    ? Colors.red
+                                    : teks == (record[index]["keterangan"])
+                                        ? Colors.yellow
+                                        : Colors.green,
                               ),
                             ),
                           ),
